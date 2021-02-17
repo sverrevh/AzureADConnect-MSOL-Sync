@@ -1,4 +1,4 @@
-# AzureADConnect-MSOL-Sync
+# AzureADConnect MSOL/Sync-account credentials decrypt
 
 Hacky way to get access to the MSOL-account and Sync-account used by Azure AD Connect to sync changes between on premise AD and Azure AD. For more information about the accounts used see: https://docs.microsoft.com/en-us/azure/active-directory/hybrid/reference-connect-accounts-permissions
 
